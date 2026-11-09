@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+    <!-- Shipping Rules Table -->
+    <table name="priyankjivani_shipping_rule" resource="default" engine="innodb" comment="PriyankJivani Shipping Rules">
+        <column xsi:type="int" name="rule_id" unsigned="true" nullable="false" identity="true" comment="Rule ID"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Rule Name"/>
+        <column xsi:type="text" name="description" nullable="true" comment="Internal Description"/>
+        <column xsi:type="smallint" name="is_active" unsigned="true" nullable="false" default="1" comment="Active Status"/>
+        <column xsi:type="int" name="priority" unsigned="false" nullable="false" default="0" comment="Priority Ordering"/>
+        <column xsi:type="smallint" name="stop_rules_processing" unsigned="true" nullable="false" default="0" comment="Discard Subsequent Rules"/>
+        <column xsi:type="date" name="from_date" nullable="true" comment="Active From Date"/>
+        <column xsi:type="date" name="to_date" nullable="true" comment="Active To Date"/>
+        <column xsi:type="varchar" name="days_of_week" nullable="true" length="255" comment="Days of week (0-6)"/>
+        <column xsi:type="varchar" name="time_from" nullable="true" length="10" comment="Daily Time From (HH:MM)"/>
+        <column xsi:type="varchar" name="time_to" nullable="true" length="10" comment="Daily Time To (HH:MM)"/>
+        <column xsi:type="text" name="carriers" nullable="true" comment="Applicable Carrier Codes"/>
+        <column xsi:type="text" name="methods" nullable="true" comment="Applicable Carrier Method Codes"/>
+        <column xsi:type="varchar" name="custom_carrier_label" nullable="true" length="255" comment="Custom Carrier Label Override"/>
+        <column xsi:type="varchar" name="custom_method_label" nullable="true" length="255" comment="Custom Method Label Override"/>
+        <column xsi:type="smallint" name="apply_in_admin" unsigned="true" nullable="false" default="1" comment="Apply Rule in Admin Orders"/>
+        <column xsi:type="smallint" name="coupon_type" unsigned="true" nullable="false" default="0" comment="Coupon Restriction Type"/>
+        <column xsi:type="varchar" name="coupon_code" nullable="true" length="255" comment="Restricted Coupon Code"/>
+        <column xsi:type="smallint" name="backorder_mode" unsigned="true" nullable="false" default="0" comment="0=All, 1=Backorder Only, 2=Non-Backorder"/>
+        <column xsi:type="varchar" name="calculation_type" nullable="false" length="32" default="replace" comment="Calculation Type: replace, surcharge, discount, partial_replace"/>
+        <column xsi:type="decimal" name="calc_base_rate" scale="4" precision="12" default="0.0000" comment="Base Order Fee/Adjustment"/>
+        <column xsi:type="decimal" name="calc_per_product" scale="4" precision="12" default="0.0000" comment="Per Product Fee"/>
+        <column xsi:type="decimal" name="calc_per_weight" scale="4" precision="12" default="0.0000" comment="Per Unit Weight Fee"/>
+        <column xsi:type="decimal" name="calc_percent_product" scale="4" precision="12" default="0.0000" comment="Percentage of Product Subtotal"/>
+        <column xsi:type="decimal" name="calc_handling_percent" scale="4" precision="12" default="0.0000" comment="Handling Percentage of Original Rate"/>
+        <column xsi:type="decimal" name="min_rate_change" scale="4" precision="12" nullable="true" comment="Minimum Rate Adjustment"/>
+        <column xsi:type="decimal" name="max_rate_change" scale="4" precision="12" nullable="true" comment="Maximum Rate Adjustment"/>
+        <column xsi:type="decimal" name="min_total_rate" scale="4" precision="12" nullable="true" comment="Minimum Total Shipping Rate"/>
+        <column xsi:type="decimal" name="max_total_rate" scale="4" precision="12" nullable="true" comment="Maximum Total Shipping Rate"/>
+        <column xsi:type="mediumtext" name="conditions_serialized" nullable="true" comment="Serialized Conditions Tree"/>
+        <column xsi:type="mediumtext" name="actions_serialized" nullable="true" comment="Serialized Actions Tree"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Creation Time"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Modification Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="rule_id"/>
+        </constraint>
+        <index referenceId="PRIYANKJIVANI_SHIPPING_RULE_ACTIVE_PRIORITY" indexType="btree">
+            <column name="is_active"/>
+            <column name="priority"/>
+        </index>
+    </table>
+
+    <!-- Rule to Store Association Table -->
+    <table name="priyankjivani_shipping_rule_store" resource="default" engine="innodb" comment="Rule Store Associations">
+        <column xsi:type="int" name="rule_id" unsigned="true" nullable="false" comment="Rule ID"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" comment="Store ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="rule_id"/>
+            <column name="store_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_PRIYANKJIVANI_SHIPPING_RULE_STORE_RULE_ID"
+                    table="priyankjivani_shipping_rule_store" column="rule_id"
+                    referenceTable="priyankjivani_shipping_rule" referenceColumn="rule_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_PRIYANKJIVANI_SHIPPING_RULE_STORE_STORE_ID"
+                    table="priyankjivani_shipping_rule_store" column="store_id"
+                    referenceTable="store" referenceColumn="store_id"
+                    onDelete="CASCADE"/>
+    </table>
+
+    <!-- Rule to Customer Group Association Table -->
+    <table name="priyankjivani_shipping_rule_customer_group" resource="default" engine="innodb" comment="Rule Customer Group Associations">
+        <column xsi:type="int" name="rule_id" unsigned="true" nullable="false" comment="Rule ID"/>
+        <column xsi:type="int" name="customer_group_id" unsigned="false" nullable="false" comment="Customer Group ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="rule_id"/>
+            <column name="customer_group_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_PRIYANKJIVANI_SHIPPING_RULE_GROUP_RULE_ID"
+                    table="priyankjivani_shipping_rule_customer_group" column="rule_id"
+                    referenceTable="priyankjivani_shipping_rule" referenceColumn="rule_id"
+                    onDelete="CASCADE"/>
+    </table>
+
+    <!-- Shipping Areas Table -->
+    <table name="priyankjivani_shipping_area" resource="default" engine="innodb" comment="PriyankJivani Shipping Areas">
+        <column xsi:type="int" name="area_id" unsigned="true" nullable="false" identity="true" comment="Area ID"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Shipping Area Name"/>
+        <column xsi:type="text" name="description" nullable="true" comment="Area Description"/>
+        <column xsi:type="smallint" name="is_active" unsigned="true" nullable="false" default="1" comment="Active Status"/>
+        <column xsi:type="smallint" name="countries_type" unsigned="true" nullable="false" default="0" comment="0=All, 1=Include, 2=Exclude"/>
+        <column xsi:type="text" name="countries" nullable="true" comment="Comma-separated Country Codes"/>
+        <column xsi:type="smallint" name="regions_type" unsigned="true" nullable="false" default="0" comment="0=All, 1=Include, 2=Exclude"/>
+        <column xsi:type="text" name="regions" nullable="true" comment="Comma-separated Region IDs or codes"/>
+        <column xsi:type="smallint" name="cities_type" unsigned="true" nullable="false" default="0" comment="0=All, 1=Include, 2=Exclude"/>
+        <column xsi:type="text" name="cities" nullable="true" comment="Cities text / lines"/>
+        <column xsi:type="smallint" name="postcodes_type" unsigned="true" nullable="false" default="0" comment="0=All, 1=Include, 2=Exclude"/>
+        <column xsi:type="text" name="postcodes" nullable="true" comment="Postcodes / Ranges"/>
+        <column xsi:type="smallint" name="address_lines_type" unsigned="true" nullable="false" default="0" comment="0=All, 1=Contains, 2=Does Not Contain"/>
+        <column xsi:type="text" name="address_lines" nullable="true" comment="Address Lines / patterns"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Creation Time"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Modification Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="area_id"/>
+        </constraint>
+        <index referenceId="PRIYANKJIVANI_SHIPPING_AREA_ACTIVE" indexType="btree">
+            <column name="is_active"/>
+        </index>
+    </table>
+
+</schema>

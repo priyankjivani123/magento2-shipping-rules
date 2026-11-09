@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="sales">
+            <group id="priyankjivani_shippingrules" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Shipping Rules by Priyank Jivani</label>
+
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Shipping Rules</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable or disable all custom shipping rule calculations storewide.</comment>
+                </field>
+
+                <field id="include_tax_in_subtotal" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Include Tax in Subtotal Conditions</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>When enabled, cart subtotal condition evaluations include tax.</comment>
+                </field>
+
+                <field id="use_subtotal_after_discount" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use Subtotal After Discount</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Evaluate cart subtotal conditions using post-discount amount.</comment>
+                </field>
+
+                <field id="display_discount_breakdown" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Shipping Discount Breakdown</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Show the calculated shipping savings in cart and checkout when discount rules apply.</comment>
+                </field>
+
+                <field id="apply_in_admin" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Apply Rules in Admin Order Creation</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Apply shipping rules when creating orders manually from the Magento Admin.</comment>
+                </field>
+
+                <field id="debug_logging" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Debug &amp; Diagnostics Logging</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Log detailed condition evaluations and rate modifications to var/log/shipping_rules.log.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

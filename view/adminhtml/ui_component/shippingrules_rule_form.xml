@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">shippingrules_rule_form.shippingrules_rule_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Shipping Rule Information</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save" class="PriyankJivani\ShippingRules\Block\Adminhtml\Rule\Edit\SaveButton"/>
+            <button name="delete" class="PriyankJivani\ShippingRules\Block\Adminhtml\Rule\Edit\DeleteButton"/>
+            <button name="back" class="PriyankJivani\ShippingRules\Block\Adminhtml\Rule\Edit\BackButton"/>
+        </buttons>
+        <namespace>shippingrules_rule_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>shippingrules_rule_form.shippingrules_rule_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="shippingrules_rule_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="shippingrules/rule/save"/>
+        </settings>
+        <dataProvider class="PriyankJivani\ShippingRules\Model\Rule\DataProvider" name="shippingrules_rule_form_data_source">
+            <settings>
+                <primaryFieldName>rule_id</primaryFieldName>
+                <requestFieldName>rule_id</requestFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <!-- General Fieldset -->
+    <fieldset name="general" sortOrder="10">
+        <settings>
+            <collapsible>true</collapsible>
+            <opened>true</opened>
+            <label translate="true">General Information</label>
+        </settings>
+        <field name="rule_id" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_rule</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>rule_id</dataScope>
+            </settings>
+        </field>
+        <field name="is_active" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_rule</item>
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Enable Rule</label>
+                <dataScope>is_active</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="name" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_rule</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Rule Name</label>
+                <dataScope>name</dataScope>
+            </settings>
+        </field>
+        <field name="description" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_rule</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Description</label>
+                <dataScope>description</dataScope>
+            </settings>
+        </field>
+        <field name="priority" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_rule</item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Priority</label>
+                <notice translate="true">Lower numbers execute first (0 is highest priority).</notice>
+                <dataScope>priority</dataScope>
+            </settings>
+        </field>
+        <field name="store_ids" formElement="multiselect">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_rule</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>number</dataType>
+                <label translate="true">Store Views</label>
+                <dataScope>store_ids</dataScope>
+            </settings>
+            <formElements>
+                <multiselect>
+                    <settings>
+                        <options class="PriyankJivani\ShippingRules\Model\Rule\Source\StoreViews"/>
+                    </settings>
+                </multiselect>
+            </formElements>
+        </field>
+        <field name="customer_group_ids" formElement="multiselect">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_rule</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>number</dataType>
+                <label translate="true">Customer Groups</label>
+                <dataScope>customer_group_ids</dataScope>
+            </settings>
+            <formElements>
+                <multiselect>
+                    <settings>
+                        <options class="PriyankJivani\ShippingRules\Model\Rule\Source\CustomerGroups"/>
+                    </settings>
+                </multiselect>
+            </formElements>
+        </field>
+        <field name="discard_subsequent_rules" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_rule</item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Discard Subsequent Rules</label>
+                <notice translate="true">Stop processing lower-priority shipping rules after this rule matches.</notice>
+                <dataScope>discard_subsequent_rules</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+    </fieldset>
+
+    <!-- Carriers and Methods Fieldset -->
+    <fieldset name="carriers_methods" sortOrder="20">
+        <settings>
+            <collapsible>true</collapsible>
+            <label translate="true">Shipping Carriers &amp; Methods</label>
+        </settings>
+        <field name="carriers" formElement="multiselect">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_rule</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Apply to Carriers</label>
+                <notice translate="true">Leave empty to apply to all shipping carriers.</notice>
+                <dataScope>carriers</dataScope>
+            </settings>
+            <formElements>
+                <multiselect>
+                    <settings>
+                        <options class="PriyankJivani\ShippingRules\Model\Rule\Source\Carriers"/>
+                    </settings>
+                </multiselect>
+            </formElements>
+        </field>
+        <field name="methods" formElement="multiselect">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_rule</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Apply to Specific Methods</label>
+                <notice translate="true">Leave empty to apply to all carrier methods.</notice>
+                <dataScope>methods</dataScope>
+            </settings>
+            <formElements>
+                <multiselect>
+                    <settings>
+                        <options class="PriyankJivani\ShippingRules\Model\Rule\Source\Methods"/>
+                    </settings>
+                </multiselect>
+            </formElements>
+        </field>
+    </fieldset>
+
+    <!-- Rate Calculation Fieldset -->
+    <fieldset name="rate_calculation" sortOrder="30">
+        <settings>
+            <collapsible>true</collapsible>
+            <label translate="true">Rate Calculation &amp; Adjustments</label>
+        </settings>
+        <field name="calculation_type" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_rule</item>
+                    <item name="default" xsi:type="string">replace</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Calculation Type</label>
+                <dataScope>calculation_type</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="PriyankJivani\ShippingRules\Model\Rule\Source\CalculationType"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="calc_base_rate" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_rule</item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Base Rate ($)</label>
+                <notice translate="true">Fixed base amount to replace, add, or deduct.</notice>
+                <dataScope>calc_base_rate</dataScope>
+            </settings>
+        </field>
+        <field name="calc_per_product" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_rule</item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Rate Per Product / Item ($)</label>
+                <notice translate="true">Multiplied by total quantity of matching products.</notice>
+                <dataScope>calc_per_product</dataScope>
+            </settings>
+        </field>
+        <field name="calc_per_weight" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_rule</item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Rate Per Unit Weight ($)</label>
+                <notice translate="true">Multiplied by total weight of matching items.</notice>
+                <dataScope>calc_per_weight</dataScope>
+            </settings>
+        </field>
+        <field name="calc_percent_product" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_rule</item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Percentage of Product Price (%)</label>
+                <notice translate="true">Percentage fee based on item subtotal.</notice>
+                <dataScope>calc_percent_product</dataScope>
+            </settings>
+        </field>
+        <field name="calc_handling_percent" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_rule</item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Handling Fee (% of Original Shipping Rate)</label>
+                <notice translate="true">Percentage applied directly to original carrier shipping rate.</notice>
+                <dataScope>calc_handling_percent</dataScope>
+            </settings>
+        </field>
+        <field name="min_rate_change" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_rule</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Minimum Rate Change ($)</label>
+                <dataScope>min_rate_change</dataScope>
+            </settings>
+        </field>
+        <field name="max_rate_change" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_rule</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Maximum Rate Change ($)</label>
+                <dataScope>max_rate_change</dataScope>
+            </settings>
+        </field>
+        <field name="min_total_rate" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_rule</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Minimum Total Rate ($)</label>
+                <notice translate="true">Guarantees final shipping rate will not be lower than this amount.</notice>
+                <dataScope>min_total_rate</dataScope>
+            </settings>
+        </field>
+        <field name="max_total_rate" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_rule</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Maximum Total Rate ($)</label>
+                <notice translate="true">Guarantees final shipping rate will not exceed this cap.</notice>
+                <dataScope>max_total_rate</dataScope>
+            </settings>
+        </field>
+        <field name="custom_carrier_title" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_rule</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Custom Carrier Title</label>
+                <notice translate="true">Override carrier title displayed in cart and checkout.</notice>
+                <dataScope>custom_carrier_title</dataScope>
+            </settings>
+        </field>
+        <field name="custom_method_title" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_rule</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Custom Method Title</label>
+                <notice translate="true">Override method title displayed in cart and checkout.</notice>
+                <dataScope>custom_method_title</dataScope>
+            </settings>
+        </field>
+    </fieldset>
+
+    <!-- Conditions Fieldset -->
+    <fieldset name="conditions" sortOrder="40">
+        <settings>
+            <collapsible>true</collapsible>
+            <label translate="true">Conditions</label>
+        </settings>
+        <container name="conditions_apply_to" sortOrder="10">
+            <htmlContent name="html_content">
+                <block name="conditions_apply_to" class="PriyankJivani\ShippingRules\Block\Adminhtml\Rule\Edit\Tab\Conditions"/>
+            </htmlContent>
+        </container>
+    </fieldset>
+
+    <!-- Schedule and Restrictions Fieldset -->
+    <fieldset name="schedule_and_coupons" sortOrder="50">
+        <settings>
+            <collapsible>true</collapsible>
+            <label translate="true">Schedule, Coupons &amp; Backorders</label>
+        </settings>
+        <field name="from_date" formElement="date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_rule</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="validate-date" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">From Date</label>
+                <dataScope>from_date</dataScope>
+            </settings>
+        </field>
+        <field name="to_date" formElement="date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_rule</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="validate-date" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">To Date</label>
+                <dataScope>to_date</dataScope>
+            </settings>
+        </field>
+        <field name="days_of_week" formElement="multiselect">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_rule</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Days of Week</label>
+                <notice translate="true">Leave empty to apply every day of the week.</notice>
+                <dataScope>days_of_week</dataScope>
+            </settings>
+            <formElements>
+                <multiselect>
+                    <settings>
+                        <options class="PriyankJivani\ShippingRules\Model\Rule\Source\DaysOfWeek"/>
+                    </settings>
+                </multiselect>
+            </formElements>
+        </field>
+        <field name="time_from" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_rule</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Active From Time</label>
+                <notice translate="true">Format HH:MM:SS (e.g., 08:00:00). Evaluated in store timezone.</notice>
+                <dataScope>time_from</dataScope>
+            </settings>
+        </field>
+        <field name="time_to" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_rule</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Active To Time</label>
+                <notice translate="true">Format HH:MM:SS (e.g., 20:00:00). Supports midnight crossing.</notice>
+                <dataScope>time_to</dataScope>
+            </settings>
+        </field>
+        <field name="coupon_type" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_rule</item>
+                    <item name="default" xsi:type="string">all</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Coupon Mode</label>
+                <dataScope>coupon_type</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="PriyankJivani\ShippingRules\Model\Rule\Source\CouponType"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="coupon_code" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_rule</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Coupon Code</label>
+                <notice translate="true">Required if coupon mode is set to specific coupon.</notice>
+                <dataScope>coupon_code</dataScope>
+            </settings>
+        </field>
+        <field name="backorder_mode" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_rule</item>
+                    <item name="default" xsi:type="string">all</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Backorder Restriction</label>
+                <dataScope>backorder_mode</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="PriyankJivani\ShippingRules\Model\Rule\Source\BackorderMode"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+    </fieldset>
+</form>

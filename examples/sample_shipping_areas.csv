@@ -1,0 +1,6 @@
+name,description,is_active,countries,regions,cities,postcodes,address_lines,address_lines_type
+"US Non-Contiguous & Remote Islands","Remote US states and island territories requiring special freight air transport",1,"US","AK,HI,PR,GU,VI","","99501-99695,96701-96898","PO Box,P.O. Box",include
+"European Union Free Trade Zone","Core European Union member states for standardized cross-border road logistics",1,"DE,FR,IT,ES,NL,BE,AT","","","","APO,FPO",exclude
+"Domestic California & West Coast Metro","Urban metropolitan zones in California with same-day courier service capabilities",1,"US","CA","Los Angeles,San Francisco,San Diego,San Jose,Sacramento","90001-90089,94101-94188","Suite,Apt,Building",include
+"UK Mainland & Highlands Exclusion Zone","Standard Great Britain territory separating offshore islands and remote northern highlands",1,"GB","","Inverness,Aberdeen,Lerwick","IV1-IV63,KW1-KW14,ZE1-ZE3","PO Box",include
+"Military Postal Service Locations","Overseas armed forces deployment addresses requiring customs compliance forms",1,"US","","","09001-09899,96201-96699","APO,FPO,DPO",include

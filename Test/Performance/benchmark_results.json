@@ -1,0 +1,114 @@
+[
+    {
+        "rules": 10,
+        "cart_items": 1,
+        "elapsed_ms": 0.134,
+        "avg_per_rule_ms": 0.0134,
+        "peak_memory_mb": 53.34
+    },
+    {
+        "rules": 10,
+        "cart_items": 10,
+        "elapsed_ms": 0.272,
+        "avg_per_rule_ms": 0.0272,
+        "peak_memory_mb": 53.34
+    },
+    {
+        "rules": 10,
+        "cart_items": 50,
+        "elapsed_ms": 1.008,
+        "avg_per_rule_ms": 0.1008,
+        "peak_memory_mb": 53.34
+    },
+    {
+        "rules": 10,
+        "cart_items": 100,
+        "elapsed_ms": 1.914,
+        "avg_per_rule_ms": 0.1914,
+        "peak_memory_mb": 53.34
+    },
+    {
+        "rules": 50,
+        "cart_items": 1,
+        "elapsed_ms": 0.372,
+        "avg_per_rule_ms": 0.0074,
+        "peak_memory_mb": 53.34
+    },
+    {
+        "rules": 50,
+        "cart_items": 10,
+        "elapsed_ms": 1.229,
+        "avg_per_rule_ms": 0.0246,
+        "peak_memory_mb": 53.34
+    },
+    {
+        "rules": 50,
+        "cart_items": 50,
+        "elapsed_ms": 4.861,
+        "avg_per_rule_ms": 0.0972,
+        "peak_memory_mb": 53.34
+    },
+    {
+        "rules": 50,
+        "cart_items": 100,
+        "elapsed_ms": 9.321,
+        "avg_per_rule_ms": 0.1864,
+        "peak_memory_mb": 53.34
+    },
+    {
+        "rules": 100,
+        "cart_items": 1,
+        "elapsed_ms": 0.717,
+        "avg_per_rule_ms": 0.0072,
+        "peak_memory_mb": 53.34
+    },
+    {
+        "rules": 100,
+        "cart_items": 10,
+        "elapsed_ms": 2.468,
+        "avg_per_rule_ms": 0.0247,
+        "peak_memory_mb": 53.34
+    },
+    {
+        "rules": 100,
+        "cart_items": 50,
+        "elapsed_ms": 9.608,
+        "avg_per_rule_ms": 0.0961,
+        "peak_memory_mb": 53.34
+    },
+    {
+        "rules": 100,
+        "cart_items": 100,
+        "elapsed_ms": 18.613,
+        "avg_per_rule_ms": 0.1861,
+        "peak_memory_mb": 53.34
+    },
+    {
+        "rules": 500,
+        "cart_items": 1,
+        "elapsed_ms": 3.512,
+        "avg_per_rule_ms": 0.007,
+        "peak_memory_mb": 53.34
+    },
+    {
+        "rules": 500,
+        "cart_items": 10,
+        "elapsed_ms": 11.669,
+        "avg_per_rule_ms": 0.0233,
+        "peak_memory_mb": 53.34
+    },
+    {
+        "rules": 500,
+        "cart_items": 50,
+        "elapsed_ms": 48.846,
+        "avg_per_rule_ms": 0.0977,
+        "peak_memory_mb": 53.34
+    },
+    {
+        "rules": 500,
+        "cart_items": 100,
+        "elapsed_ms": 92.285,
+        "avg_per_rule_ms": 0.1846,
+        "peak_memory_mb": 53.34
+    }
+]

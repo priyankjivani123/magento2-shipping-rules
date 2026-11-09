@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">shippingrules_area_form.shippingrules_area_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Shipping Area Information</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save" class="PriyankJivani\ShippingRules\Block\Adminhtml\Area\Edit\SaveButton"/>
+            <button name="delete" class="PriyankJivani\ShippingRules\Block\Adminhtml\Area\Edit\DeleteButton"/>
+            <button name="back" class="PriyankJivani\ShippingRules\Block\Adminhtml\Area\Edit\BackButton"/>
+        </buttons>
+        <namespace>shippingrules_area_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>shippingrules_area_form.shippingrules_area_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="shippingrules_area_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="shippingrules/area/save"/>
+        </settings>
+        <dataProvider class="PriyankJivani\ShippingRules\Model\Area\DataProvider" name="shippingrules_area_form_data_source">
+            <settings>
+                <primaryFieldName>area_id</primaryFieldName>
+                <requestFieldName>area_id</requestFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <settings>
+            <label translate="true">General Information</label>
+        </settings>
+        <field name="area_id" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_area</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>area_id</dataScope>
+            </settings>
+        </field>
+        <field name="is_active" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_area</item>
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Enable Area</label>
+                <dataScope>is_active</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="name" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_area</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Area Name</label>
+                <dataScope>name</dataScope>
+            </settings>
+        </field>
+        <field name="description" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_area</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Description</label>
+                <dataScope>description</dataScope>
+            </settings>
+        </field>
+    </fieldset>
+    <fieldset name="geographic_criteria">
+        <settings>
+            <label translate="true">Geographic Criteria</label>
+        </settings>
+        <field name="countries" formElement="multiselect">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_area</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Countries</label>
+                <dataScope>countries</dataScope>
+            </settings>
+            <formElements>
+                <multiselect>
+                    <settings>
+                        <options class="Magento\Directory\Model\Config\Source\Country"/>
+                    </settings>
+                </multiselect>
+            </formElements>
+        </field>
+        <field name="cities" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_area</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Cities</label>
+                <notice translate="true">Enter one city name per line.</notice>
+                <dataScope>cities</dataScope>
+            </settings>
+        </field>
+        <field name="postcodes" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_area</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">ZIP / Postcodes</label>
+                <notice translate="true">Supports exact codes (90210), ranges (99501-99524), and wildcards (995*). One per line.</notice>
+                <dataScope>postcodes</dataScope>
+            </settings>
+        </field>
+        <field name="address_lines" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_area</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Address Lines</label>
+                <notice translate="true">E.g., PO Box, P.O. Box, Suite, APO, FPO. One pattern per line.</notice>
+                <dataScope>address_lines</dataScope>
+            </settings>
+        </field>
+        <field name="address_lines_type" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">shipping_area</item>
+                    <item name="default" xsi:type="string">include</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Address Lines Mode</label>
+                <dataScope>address_lines_type</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="PriyankJivani\ShippingRules\Model\Area\Source\AddressLinesType"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+    </fieldset>
+</form>

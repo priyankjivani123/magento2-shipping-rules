@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Sales::sales">
+                    <resource id="PriyankJivani_ShippingRules::shipping_rules" title="Shipping Rules" sortOrder="50">
+                        <resource id="PriyankJivani_ShippingRules::manage_rules" title="Manage Rules" sortOrder="10"/>
+                    </resource>
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="PriyankJivani_ShippingRules::shipping_areas" title="Shipping Areas" sortOrder="60"/>
+                    </resource>
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Config::config">
+                        <resource id="PriyankJivani_ShippingRules::config" title="Shipping Rules Settings"/>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

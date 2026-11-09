@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- Interface Preferences -->
+    <preference for="PriyankJivani\ShippingRules\Api\Data\RuleInterface"
+                type="PriyankJivani\ShippingRules\Model\Rule"/>
+    <preference for="PriyankJivani\ShippingRules\Api\RuleRepositoryInterface"
+                type="PriyankJivani\ShippingRules\Model\RuleRepository"/>
+
+    <preference for="PriyankJivani\ShippingRules\Api\Data\ShippingAreaInterface"
+                type="PriyankJivani\ShippingRules\Model\ShippingArea"/>
+    <preference for="PriyankJivani\ShippingRules\Api\ShippingAreaRepositoryInterface"
+                type="PriyankJivani\ShippingRules\Model\ShippingAreaRepository"/>
+
+    <!-- Shipping Rate Collection Plugin -->
+    <type name="Magento\Shipping\Model\Shipping">
+        <plugin name="PriyankJivani_ShippingRules::apply_shipping_rules"
+                type="PriyankJivani\ShippingRules\Plugin\ShippingPlugin"
+                sortOrder="100"/>
+    </type>
+
+    <!-- Grid Collections for UI Components -->
+    <virtualType name="PriyankJivani\ShippingRules\Model\ResourceModel\Rule\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">priyankjivani_shipping_rule</argument>
+            <argument name="resourceModel" xsi:type="string">PriyankJivani\ShippingRules\Model\ResourceModel\Rule</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="PriyankJivani\ShippingRules\Model\ResourceModel\ShippingArea\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">priyankjivani_shipping_area</argument>
+            <argument name="resourceModel" xsi:type="string">PriyankJivani\ShippingRules\Model\ResourceModel\ShippingArea</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="shippingrules_rule_listing_data_source" xsi:type="string">PriyankJivani\ShippingRules\Model\ResourceModel\Rule\Grid\Collection</item>
+                <item name="shippingrules_area_listing_data_source" xsi:type="string">PriyankJivani\ShippingRules\Model\ResourceModel\ShippingArea\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+</config>
