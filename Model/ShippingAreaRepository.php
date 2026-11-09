@@ -14,23 +14,30 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\CouldNotDeleteException;
 
+use PriyankJivani\ShippingRules\Api\Data\ShippingAreaSearchResultInterface;
+use PriyankJivani\ShippingRules\Api\Data\ShippingAreaSearchResultInterfaceFactory;
+use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
+
 class ShippingAreaRepository implements ShippingAreaRepositoryInterface
 {
     private ShippingAreaFactory $areaFactory;
     private AreaResource $areaResource;
     private AreaCollectionFactory $collectionFactory;
-    private SearchResultsInterfaceFactory $searchResultsFactory;
+    private ShippingAreaSearchResultInterfaceFactory $searchResultsFactory;
+    private ?CollectionProcessorInterface $collectionProcessor;
 
     public function __construct(
         ShippingAreaFactory $areaFactory,
         AreaResource $areaResource,
         AreaCollectionFactory $collectionFactory,
-        SearchResultsInterfaceFactory $searchResultsFactory
+        ShippingAreaSearchResultInterfaceFactory $searchResultsFactory,
+        ?CollectionProcessorInterface $collectionProcessor = null
     ) {
         $this->areaFactory = $areaFactory;
         $this->areaResource = $areaResource;
         $this->collectionFactory = $collectionFactory;
         $this->searchResultsFactory = $searchResultsFactory;
+        $this->collectionProcessor = $collectionProcessor ?: \Magento\Framework\App\ObjectManager::getInstance()->get(CollectionProcessorInterface::class);
     }
 
     public function save(ShippingAreaInterface $area): ShippingAreaInterface
@@ -68,9 +75,12 @@ class ShippingAreaRepository implements ShippingAreaRepositoryInterface
         return $this->delete($this->getById($areaId));
     }
 
-    public function getList(SearchCriteriaInterface $searchCriteria): SearchResultsInterface
+    public function getList(SearchCriteriaInterface $searchCriteria): ShippingAreaSearchResultInterface
     {
         $collection = $this->collectionFactory->create();
+        if ($this->collectionProcessor) {
+            $this->collectionProcessor->process($searchCriteria, $collection);
+        }
         $searchResults = $this->searchResultsFactory->create();
         $searchResults->setSearchCriteria($searchCriteria);
         $searchResults->setTotalCount($collection->getSize());

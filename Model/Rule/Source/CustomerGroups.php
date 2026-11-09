@@ -22,7 +22,7 @@ class CustomerGroups implements OptionSourceInterface
         $seen = [];
 
         foreach ($collection as $group) {
-            $id = (int)$group->getId();
+            $id = (string)$group->getId();
             $seen[$id] = true;
             $code = $group->getCustomerGroupCode();
             $groups[] = [
@@ -31,9 +31,9 @@ class CustomerGroups implements OptionSourceInterface
             ];
         }
 
-        if (!isset($seen[0])) {
+        if (!isset($seen['0'])) {
             array_unshift($groups, [
-                'value' => 0,
+                'value' => '0',
                 'label' => __('NOT LOGGED IN')
             ]);
         }

@@ -5,13 +5,24 @@ namespace PriyankJivani\ShippingRules\Controller\Adminhtml\Rule;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
+use Magento\Backend\Model\View\Result\ForwardFactory;
+use Magento\Framework\App\Action\HttpGetActionInterface;
 
-class NewAction extends Action
+class NewAction extends Action implements HttpGetActionInterface
 {
     public const ADMIN_RESOURCE = 'PriyankJivani_ShippingRules::manage_rules';
 
+    private ForwardFactory $resultForwardFactory;
+
+    public function __construct(Context $context, ForwardFactory $resultForwardFactory)
+    {
+        parent::__construct($context);
+        $this->resultForwardFactory = $resultForwardFactory;
+    }
+
     public function execute()
     {
-        $this->_forward('edit');
+        $resultForward = $this->resultForwardFactory->create();
+        return $resultForward->forward('edit');
     }
 }

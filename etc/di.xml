@@ -7,11 +7,15 @@
                 type="PriyankJivani\ShippingRules\Model\Rule"/>
     <preference for="PriyankJivani\ShippingRules\Api\RuleRepositoryInterface"
                 type="PriyankJivani\ShippingRules\Model\RuleRepository"/>
+    <preference for="PriyankJivani\ShippingRules\Api\Data\RuleSearchResultInterface"
+                type="PriyankJivani\ShippingRules\Model\RuleSearchResult"/>
 
     <preference for="PriyankJivani\ShippingRules\Api\Data\ShippingAreaInterface"
                 type="PriyankJivani\ShippingRules\Model\ShippingArea"/>
     <preference for="PriyankJivani\ShippingRules\Api\ShippingAreaRepositoryInterface"
                 type="PriyankJivani\ShippingRules\Model\ShippingAreaRepository"/>
+    <preference for="PriyankJivani\ShippingRules\Api\Data\ShippingAreaSearchResultInterface"
+                type="PriyankJivani\ShippingRules\Model\ShippingAreaSearchResult"/>
 
     <!-- Shipping Rate Collection Plugin -->
     <type name="Magento\Shipping\Model\Shipping">

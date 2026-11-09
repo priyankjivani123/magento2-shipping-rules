@@ -10,6 +10,8 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\CouldNotDeleteException;
 
+use PriyankJivani\ShippingRules\Api\Data\ShippingAreaSearchResultInterface;
+
 interface ShippingAreaRepositoryInterface
 {
     /**
@@ -53,7 +55,7 @@ interface ShippingAreaRepositoryInterface
      * Get list of shipping areas matching criteria.
      *
      * @param SearchCriteriaInterface $searchCriteria
-     * @return SearchResultsInterface
+     * @return ShippingAreaSearchResultInterface
      */
-    public function getList(SearchCriteriaInterface $searchCriteria): SearchResultsInterface;
+    public function getList(SearchCriteriaInterface $searchCriteria): ShippingAreaSearchResultInterface;
 }

@@ -39,10 +39,6 @@ class RuleProcessor
             'priyankjivani_shippingrules/general/enabled',
             ScopeInterface::SCOPE_STORE,
             $storeId
-        ) || $this->scopeConfig->isSetFlag(
-            'sales/priyankjivani_shippingrules/enabled',
-            ScopeInterface::SCOPE_STORE,
-            $storeId
         );
     }
 
@@ -64,10 +60,6 @@ class RuleProcessor
 
         $debug = $this->scopeConfig->isSetFlag(
             'priyankjivani_shippingrules/general/debug_logging',
-            ScopeInterface::SCOPE_STORE,
-            $storeId
-        ) || $this->scopeConfig->isSetFlag(
-            'sales/priyankjivani_shippingrules/debug_logging',
             ScopeInterface::SCOPE_STORE,
             $storeId
         );

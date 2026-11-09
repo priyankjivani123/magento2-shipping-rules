@@ -8,18 +8,22 @@ use Magento\Quote\Model\Quote\Address\RateRequest;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\Framework\App\State;
 use Magento\Framework\App\Area;
+use Magento\Quote\Model\Quote\AddressFactory;
 
 class RuleEvaluator
 {
     private TimezoneInterface $timezone;
     private State $appState;
+    private AddressFactory $addressFactory;
 
     public function __construct(
         TimezoneInterface $timezone,
-        State $appState
+        State $appState,
+        AddressFactory $addressFactory
     ) {
         $this->timezone = $timezone;
         $this->appState = $appState;
+        $this->addressFactory = $addressFactory;
     }
 
     public function isRuleApplicable(
@@ -76,12 +80,51 @@ class RuleEvaluator
             if (!$this->matchBackorders($rule, $items)) {
                 return false;
             }
+        }
 
-            // Condition Tree Evaluation
-            $address = $quote->getShippingAddress();
-            if ($address && !$rule->validate($address)) {
-                return false;
+        // 6. Condition Tree Evaluation on Shipping Address
+        $address = $quote ? $quote->getShippingAddress() : null;
+        if (!$address) {
+            $address = $this->addressFactory->create();
+        }
+
+        // Synchronize destination & quote parameters from RateRequest for accurate evaluation
+        if ($request->getDestCountryId()) {
+            $address->setCountryId($request->getDestCountryId());
+        }
+        if ($request->getDestRegionId()) {
+            $address->setRegionId($request->getDestRegionId());
+        }
+        if ($request->getDestRegionCode()) {
+            $address->setRegionCode($request->getDestRegionCode());
+            if (!$address->getRegion()) {
+                $address->setRegion($request->getDestRegionCode());
             }
+        }
+        if ($request->getDestPostcode()) {
+            $address->setPostcode($request->getDestPostcode());
+        }
+        if ($request->getDestCity()) {
+            $address->setCity($request->getDestCity());
+        }
+        if ($request->getDestStreet()) {
+            $address->setStreet($request->getDestStreet());
+        }
+        if ($request->getPackageValue() !== null) {
+            $address->setBaseSubtotal((float)$request->getPackageValue());
+        }
+        if ($request->getPackageValueWithDiscount() !== null) {
+            $address->setBaseSubtotalWithDiscount((float)$request->getPackageValueWithDiscount());
+        }
+        if ($request->getPackageWeight() !== null) {
+            $address->setWeight((float)$request->getPackageWeight());
+        }
+        if ($request->getPackageQty() !== null) {
+            $address->setTotalQty((float)$request->getPackageQty());
+        }
+
+        if ($address && !$rule->validate($address)) {
+            return false;
         }
 
         return true;

@@ -125,10 +125,13 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">shipping_rule</item>
+                    <item name="default" xsi:type="array">
+                        <item name="0" xsi:type="string">0</item>
+                    </item>
                 </item>
             </argument>
             <settings>
-                <dataType>number</dataType>
+                <dataType>string</dataType>
                 <label translate="true">Store Views</label>
                 <dataScope>store_ids</dataScope>
             </settings>
@@ -144,10 +147,16 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">shipping_rule</item>
+                    <item name="default" xsi:type="array">
+                        <item name="0" xsi:type="string">0</item>
+                        <item name="1" xsi:type="string">1</item>
+                        <item name="2" xsi:type="string">2</item>
+                        <item name="3" xsi:type="string">3</item>
+                    </item>
                 </item>
             </argument>
             <settings>
-                <dataType>number</dataType>
+                <dataType>string</dataType>
                 <label translate="true">Customer Groups</label>
                 <dataScope>customer_group_ids</dataScope>
             </settings>

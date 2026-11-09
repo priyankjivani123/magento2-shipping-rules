@@ -28,12 +28,14 @@ class RateCalculator
 
         $rawAdjustment = $baseFee + $perProductFee + $perWeightFee + $percentProductFee + $handlingFee;
 
-        // 3. Apply min/max adjustment clamps if configured
-        if ($rule->getMinRateChange() !== null && $rawAdjustment < (float)$rule->getMinRateChange()) {
-            $rawAdjustment = (float)$rule->getMinRateChange();
+        // 3. Apply min/max adjustment clamps if configured (> 0)
+        $minRateChange = (float)$rule->getMinRateChange();
+        $maxRateChange = (float)$rule->getMaxRateChange();
+        if ($minRateChange > 0.0001 && $rawAdjustment < $minRateChange) {
+            $rawAdjustment = $minRateChange;
         }
-        if ($rule->getMaxRateChange() !== null && $rawAdjustment > (float)$rule->getMaxRateChange()) {
-            $rawAdjustment = (float)$rule->getMaxRateChange();
+        if ($maxRateChange > 0.0001 && $rawAdjustment > $maxRateChange) {
+            $rawAdjustment = $maxRateChange;
         }
 
         // 4. Calculate Final Shipping Amount based on calculation type
@@ -65,12 +67,14 @@ class RateCalculator
                 break;
         }
 
-        // 5. Apply min/max total rate clamps
-        if ($rule->getMinTotalRate() !== null && $finalRate < (float)$rule->getMinTotalRate()) {
-            $finalRate = (float)$rule->getMinTotalRate();
+        // 5. Apply min/max total rate clamps if configured (> 0)
+        $minTotalRate = (float)$rule->getMinTotalRate();
+        $maxTotalRate = (float)$rule->getMaxTotalRate();
+        if ($minTotalRate > 0.0001 && $finalRate < $minTotalRate) {
+            $finalRate = $minTotalRate;
         }
-        if ($rule->getMaxTotalRate() !== null && $finalRate > (float)$rule->getMaxTotalRate()) {
-            $finalRate = (float)$rule->getMaxTotalRate();
+        if ($maxTotalRate > 0.0001 && $finalRate > $maxTotalRate) {
+            $finalRate = $maxTotalRate;
         }
 
         // Safety safeguard: Never negative rate

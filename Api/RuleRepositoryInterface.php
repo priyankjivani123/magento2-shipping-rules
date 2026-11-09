@@ -10,6 +10,8 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\CouldNotDeleteException;
 
+use PriyankJivani\ShippingRules\Api\Data\RuleSearchResultInterface;
+
 interface RuleRepositoryInterface
 {
     /**
@@ -53,7 +55,7 @@ interface RuleRepositoryInterface
      * Get list of shipping rules matching search criteria.
      *
      * @param SearchCriteriaInterface $searchCriteria
-     * @return SearchResultsInterface
+     * @return RuleSearchResultInterface
      */
-    public function getList(SearchCriteriaInterface $searchCriteria): SearchResultsInterface;
+    public function getList(SearchCriteriaInterface $searchCriteria): RuleSearchResultInterface;
 }

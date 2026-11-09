@@ -10,23 +10,29 @@ use Magento\Quote\Model\Quote\Address\RateRequest;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\Framework\App\State;
 use Magento\Framework\App\Area;
+use Magento\Quote\Model\Quote\AddressFactory;
 
 class RuleEvaluatorTest extends TestCase
 {
     private $timezoneMock;
     private $appStateMock;
+    private $addressFactoryMock;
     private RuleEvaluator $evaluator;
 
     protected function setUp(): void
     {
         $this->timezoneMock = $this->createMock(TimezoneInterface::class);
         $this->appStateMock = $this->createMock(State::class);
+        $this->addressFactoryMock = $this->createMock(AddressFactory::class);
         $this->appStateMock->method('getAreaCode')->willReturn(Area::AREA_FRONTEND);
 
         $now = new \DateTimeImmutable('2026-11-09 14:30:00'); // Monday, 14:30
         $this->timezoneMock->method('date')->willReturn($now);
 
-        $this->evaluator = new RuleEvaluator($this->timezoneMock, $this->appStateMock);
+        $addressMock = $this->createMock(\Magento\Quote\Model\Quote\Address::class);
+        $this->addressFactoryMock->method('create')->willReturn($addressMock);
+
+        $this->evaluator = new RuleEvaluator($this->timezoneMock, $this->appStateMock, $this->addressFactoryMock);
     }
 
     private function createRuleMock(array $data): RuleInterface
@@ -46,6 +52,7 @@ class RuleEvaluatorTest extends TestCase
         $rule->method('getCouponCode')->willReturn($data['coupon_code'] ?? null);
         $rule->method('getBackorderMode')->willReturn((int)($data['backorder_mode'] ?? RuleInterface::BACKORDER_ALL));
         $rule->method('getCustomerGroupIds')->willReturn($data['customer_group_ids'] ?? [0, 1, 2, 3]);
+        $rule->method('validate')->willReturn($data['validate'] ?? true);
 
         return $rule;
     }

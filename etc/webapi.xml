@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+
+    <!-- Shipping Rules CRUD API -->
+    <route url="/V1/shippingrules/rule/:ruleId" method="GET">
+        <service class="PriyankJivani\ShippingRules\Api\RuleRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="PriyankJivani_ShippingRules::manage_rules"/>
+        </resources>
+    </route>
+
+    <route url="/V1/shippingrules/rule/search" method="GET">
+        <service class="PriyankJivani\ShippingRules\Api\RuleRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="PriyankJivani_ShippingRules::manage_rules"/>
+        </resources>
+    </route>
+
+    <route url="/V1/shippingrules/rule" method="POST">
+        <service class="PriyankJivani\ShippingRules\Api\RuleRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="PriyankJivani_ShippingRules::manage_rules"/>
+        </resources>
+    </route>
+
+    <route url="/V1/shippingrules/rule/:ruleId" method="PUT">
+        <service class="PriyankJivani\ShippingRules\Api\RuleRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="PriyankJivani_ShippingRules::manage_rules"/>
+        </resources>
+    </route>
+
+    <route url="/V1/shippingrules/rule/:ruleId" method="DELETE">
+        <service class="PriyankJivani\ShippingRules\Api\RuleRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="PriyankJivani_ShippingRules::manage_rules"/>
+        </resources>
+    </route>
+
+    <!-- Shipping Areas CRUD API -->
+    <route url="/V1/shippingrules/area/:areaId" method="GET">
+        <service class="PriyankJivani\ShippingRules\Api\ShippingAreaRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="PriyankJivani_ShippingRules::shipping_areas"/>
+        </resources>
+    </route>
+
+    <route url="/V1/shippingrules/area/search" method="GET">
+        <service class="PriyankJivani\ShippingRules\Api\ShippingAreaRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="PriyankJivani_ShippingRules::shipping_areas"/>
+        </resources>
+    </route>
+
+    <route url="/V1/shippingrules/area" method="POST">
+        <service class="PriyankJivani\ShippingRules\Api\ShippingAreaRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="PriyankJivani_ShippingRules::shipping_areas"/>
+        </resources>
+    </route>
+
+    <route url="/V1/shippingrules/area/:areaId" method="PUT">
+        <service class="PriyankJivani\ShippingRules\Api\ShippingAreaRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="PriyankJivani_ShippingRules::shipping_areas"/>
+        </resources>
+    </route>
+
+    <route url="/V1/shippingrules/area/:areaId" method="DELETE">
+        <service class="PriyankJivani\ShippingRules\Api\ShippingAreaRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="PriyankJivani_ShippingRules::shipping_areas"/>
+        </resources>
+    </route>
+
+</routes>

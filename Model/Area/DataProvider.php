@@ -50,10 +50,25 @@ class DataProvider extends AbstractDataProvider
             $this->loadedData[$area->getId()] = $data;
         }
 
+        $defaultAreaData = [
+            'area_id' => null,
+            'is_active' => '1',
+            'name' => '',
+            'description' => '',
+            'countries' => [],
+            'regions' => [],
+            'cities' => '',
+            'postcodes' => '',
+            'address_lines' => '',
+            'address_lines_type' => 'include'
+        ];
+
+        $this->loadedData[''] = $defaultAreaData;
+
         $data = $this->dataPersistor->get('shippingrules_area');
         if (!empty($data)) {
-            $areaId = $data['area_id'] ?? null;
-            $this->loadedData[$areaId] = $data;
+            $areaId = $data['area_id'] ?? '';
+            $this->loadedData[$areaId] = array_merge($defaultAreaData, $data);
             $this->dataPersistor->clear('shippingrules_area');
         }
 

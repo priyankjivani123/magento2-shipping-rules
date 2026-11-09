@@ -30,45 +30,157 @@ interface ShippingAreaInterface
     public const ADDR_TYPE_CONTAINS = 1;
     public const ADDR_TYPE_NOT_CONTAINS = 2;
 
+    /**
+     * @return int|null
+     */
     public function getAreaId(): ?int;
-    public function setAreaId(?int $id): self;
 
+    /**
+     * @param int|null $id
+     * @return $this
+     */
+    public function setAreaId(?int $id);
+
+    /**
+     * @return string
+     */
     public function getName(): string;
-    public function setName(string $name): self;
 
+    /**
+     * @param string $name
+     * @return $this
+     */
+    public function setName(string $name);
+
+    /**
+     * @return string|null
+     */
     public function getDescription(): ?string;
-    public function setDescription(?string $desc): self;
 
+    /**
+     * @param string|null $desc
+     * @return $this
+     */
+    public function setDescription(?string $desc);
+
+    /**
+     * @return bool
+     */
     public function getIsActive(): bool;
-    public function setIsActive(bool $active): self;
 
+    /**
+     * @param bool $active
+     * @return $this
+     */
+    public function setIsActive(bool $active);
+
+    /**
+     * @return int
+     */
     public function getCountriesType(): int;
-    public function setCountriesType(int $type): self;
 
+    /**
+     * @param int $type
+     * @return $this
+     */
+    public function setCountriesType(int $type);
+
+    /**
+     * @return string|null
+     */
     public function getCountries(): ?string;
-    public function setCountries(?string $countries): self;
 
+    /**
+     * @param string|null $countries
+     * @return $this
+     */
+    public function setCountries(?string $countries);
+
+    /**
+     * @return int
+     */
     public function getRegionsType(): int;
-    public function setRegionsType(int $type): self;
 
+    /**
+     * @param int $type
+     * @return $this
+     */
+    public function setRegionsType(int $type);
+
+    /**
+     * @return string|null
+     */
     public function getRegions(): ?string;
-    public function setRegions(?string $regions): self;
 
+    /**
+     * @param string|null $regions
+     * @return $this
+     */
+    public function setRegions(?string $regions);
+
+    /**
+     * @return int
+     */
     public function getCitiesType(): int;
-    public function setCitiesType(int $type): self;
 
+    /**
+     * @param int $type
+     * @return $this
+     */
+    public function setCitiesType(int $type);
+
+    /**
+     * @return string|null
+     */
     public function getCities(): ?string;
-    public function setCities(?string $cities): self;
 
+    /**
+     * @param string|null $cities
+     * @return $this
+     */
+    public function setCities(?string $cities);
+
+    /**
+     * @return int
+     */
     public function getPostcodesType(): int;
-    public function setPostcodesType(int $type): self;
 
+    /**
+     * @param int $type
+     * @return $this
+     */
+    public function setPostcodesType(int $type);
+
+    /**
+     * @return string|null
+     */
     public function getPostcodes(): ?string;
-    public function setPostcodes(?string $postcodes): self;
 
+    /**
+     * @param string|null $postcodes
+     * @return $this
+     */
+    public function setPostcodes(?string $postcodes);
+
+    /**
+     * @return int
+     */
     public function getAddressLinesType(): int;
-    public function setAddressLinesType(int $type): self;
 
+    /**
+     * @param int $type
+     * @return $this
+     */
+    public function setAddressLinesType(int $type);
+
+    /**
+     * @return string|null
+     */
     public function getAddressLines(): ?string;
-    public function setAddressLines(?string $addressLines): self;
+
+    /**
+     * @param string|null $lines
+     * @return $this
+     */
+    public function setAddressLines(?string $lines);
 }

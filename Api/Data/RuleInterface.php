@@ -57,99 +57,363 @@ interface RuleInterface
     public const BACKORDER_ONLY = 1;
     public const BACKORDER_EXCLUDE = 2;
 
+    /**
+     * @return int|null
+     */
     public function getRuleId(): ?int;
-    public function setRuleId(?int $id): self;
 
+    /**
+     * @param int|null $id
+     * @return $this
+     */
+    public function setRuleId(?int $id);
+
+    /**
+     * @return string
+     */
     public function getName(): string;
-    public function setName(string $name): self;
 
+    /**
+     * @param string $name
+     * @return $this
+     */
+    public function setName(string $name);
+
+    /**
+     * @return string|null
+     */
     public function getDescription(): ?string;
-    public function setDescription(?string $desc): self;
 
+    /**
+     * @param string|null $desc
+     * @return $this
+     */
+    public function setDescription(?string $desc);
+
+    /**
+     * @return bool
+     */
     public function getIsActive(): bool;
-    public function setIsActive(bool $active): self;
 
+    /**
+     * @param bool $active
+     * @return $this
+     */
+    public function setIsActive(bool $active);
+
+    /**
+     * @return int
+     */
     public function getPriority(): int;
-    public function setPriority(int $priority): self;
 
+    /**
+     * @param int $priority
+     * @return $this
+     */
+    public function setPriority(int $priority);
+
+    /**
+     * @return bool
+     */
     public function getStopRulesProcessing(): bool;
-    public function setStopRulesProcessing(bool $stop): self;
 
+    /**
+     * @param bool $stop
+     * @return $this
+     */
+    public function setStopRulesProcessing(bool $stop);
+
+    /**
+     * @return string|null
+     */
     public function getFromDate(): ?string;
-    public function setFromDate(?string $fromDate): self;
 
+    /**
+     * @param string|null $fromDate
+     * @return $this
+     */
+    public function setFromDate(?string $fromDate);
+
+    /**
+     * @return string|null
+     */
     public function getToDate(): ?string;
-    public function setToDate(?string $toDate): self;
 
+    /**
+     * @param string|null $toDate
+     * @return $this
+     */
+    public function setToDate(?string $toDate);
+
+    /**
+     * @return string|null
+     */
     public function getDaysOfWeek(): ?string;
-    public function setDaysOfWeek(?string $days): self;
 
+    /**
+     * @param string|null $days
+     * @return $this
+     */
+    public function setDaysOfWeek(?string $days);
+
+    /**
+     * @return string|null
+     */
     public function getTimeFrom(): ?string;
-    public function setTimeFrom(?string $timeFrom): self;
 
+    /**
+     * @param string|null $timeFrom
+     * @return $this
+     */
+    public function setTimeFrom(?string $timeFrom);
+
+    /**
+     * @return string|null
+     */
     public function getTimeTo(): ?string;
-    public function setTimeTo(?string $timeTo): self;
 
+    /**
+     * @param string|null $timeTo
+     * @return $this
+     */
+    public function setTimeTo(?string $timeTo);
+
+    /**
+     * @return string|null
+     */
     public function getCarriers(): ?string;
-    public function setCarriers(?string $carriers): self;
 
+    /**
+     * @param string|null $carriers
+     * @return $this
+     */
+    public function setCarriers(?string $carriers);
+
+    /**
+     * @return string|null
+     */
     public function getMethods(): ?string;
-    public function setMethods(?string $methods): self;
 
+    /**
+     * @param string|null $methods
+     * @return $this
+     */
+    public function setMethods(?string $methods);
+
+    /**
+     * @return string|null
+     */
     public function getCustomCarrierLabel(): ?string;
-    public function setCustomCarrierLabel(?string $label): self;
 
+    /**
+     * @param string|null $label
+     * @return $this
+     */
+    public function setCustomCarrierLabel(?string $label);
+
+    /**
+     * @return string|null
+     */
     public function getCustomMethodLabel(): ?string;
-    public function setCustomMethodLabel(?string $label): self;
 
+    /**
+     * @param string|null $label
+     * @return $this
+     */
+    public function setCustomMethodLabel(?string $label);
+
+    /**
+     * @return bool
+     */
     public function getApplyInAdmin(): bool;
-    public function setApplyInAdmin(bool $apply): self;
 
+    /**
+     * @param bool $apply
+     * @return $this
+     */
+    public function setApplyInAdmin(bool $apply);
+
+    /**
+     * @return int
+     */
     public function getCouponType(): int;
-    public function setCouponType(int $type): self;
 
+    /**
+     * @param int $type
+     * @return $this
+     */
+    public function setCouponType(int $type);
+
+    /**
+     * @return string|null
+     */
     public function getCouponCode(): ?string;
-    public function setCouponCode(?string $coupon): self;
 
+    /**
+     * @param string|null $coupon
+     * @return $this
+     */
+    public function setCouponCode(?string $coupon);
+
+    /**
+     * @return int
+     */
     public function getBackorderMode(): int;
-    public function setBackorderMode(int $mode): self;
 
+    /**
+     * @param int $mode
+     * @return $this
+     */
+    public function setBackorderMode(int $mode);
+
+    /**
+     * @return string
+     */
     public function getCalculationType(): string;
-    public function setCalculationType(string $calcType): self;
 
+    /**
+     * @param string $calcType
+     * @return $this
+     */
+    public function setCalculationType(string $calcType);
+
+    /**
+     * @return float
+     */
     public function getCalcBaseRate(): float;
-    public function setCalcBaseRate(float $rate): self;
 
+    /**
+     * @param float $rate
+     * @return $this
+     */
+    public function setCalcBaseRate(float $rate);
+
+    /**
+     * @return float
+     */
     public function getCalcPerProduct(): float;
-    public function setCalcPerProduct(float $rate): self;
 
+    /**
+     * @param float $rate
+     * @return $this
+     */
+    public function setCalcPerProduct(float $rate);
+
+    /**
+     * @return float
+     */
     public function getCalcPerWeight(): float;
-    public function setCalcPerWeight(float $rate): self;
 
+    /**
+     * @param float $rate
+     * @return $this
+     */
+    public function setCalcPerWeight(float $rate);
+
+    /**
+     * @return float
+     */
     public function getCalcPercentProduct(): float;
-    public function setCalcPercentProduct(float $rate): self;
 
+    /**
+     * @param float $rate
+     * @return $this
+     */
+    public function setCalcPercentProduct(float $rate);
+
+    /**
+     * @return float
+     */
     public function getCalcHandlingPercent(): float;
-    public function setCalcHandlingPercent(float $rate): self;
 
+    /**
+     * @param float $rate
+     * @return $this
+     */
+    public function setCalcHandlingPercent(float $rate);
+
+    /**
+     * @return float|null
+     */
     public function getMinRateChange(): ?float;
-    public function setMinRateChange(?float $val): self;
 
+    /**
+     * @param float|null $val
+     * @return $this
+     */
+    public function setMinRateChange(?float $val);
+
+    /**
+     * @return float|null
+     */
     public function getMaxRateChange(): ?float;
-    public function setMaxRateChange(?float $val): self;
 
+    /**
+     * @param float|null $val
+     * @return $this
+     */
+    public function setMaxRateChange(?float $val);
+
+    /**
+     * @return float|null
+     */
     public function getMinTotalRate(): ?float;
-    public function setMinTotalRate(?float $val): self;
 
+    /**
+     * @param float|null $val
+     * @return $this
+     */
+    public function setMinTotalRate(?float $val);
+
+    /**
+     * @return float|null
+     */
     public function getMaxTotalRate(): ?float;
-    public function setMaxTotalRate(?float $val): self;
 
+    /**
+     * @param float|null $val
+     * @return $this
+     */
+    public function setMaxTotalRate(?float $val);
+
+    /**
+     * @return string|null
+     */
     public function getConditionsSerialized(): ?string;
-    public function setConditionsSerialized(?string $conditions): self;
 
+    /**
+     * @param string|null $conditions
+     * @return $this
+     */
+    public function setConditionsSerialized(?string $conditions);
+
+    /**
+     * @return int[]
+     */
     public function getStoreIds(): array;
-    public function setStoreIds(array $storeIds): self;
 
+    /**
+     * @param int[] $storeIds
+     * @return $this
+     */
+    public function setStoreIds(array $storeIds);
+
+    /**
+     * @return int[]
+     */
     public function getCustomerGroupIds(): array;
-    public function setCustomerGroupIds(array $groupIds): self;
+
+    /**
+     * @param int[] $groupIds
+     * @return $this
+     */
+    public function setCustomerGroupIds(array $groupIds);
+
+    /**
+     * Validate model against rule conditions.
+     *
+     * @param \Magento\Framework\Model\AbstractModel $model
+     * @return bool
+     */
+    public function validate(\Magento\Framework\Model\AbstractModel $model);
 }
