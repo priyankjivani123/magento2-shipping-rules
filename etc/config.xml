@@ -2,6 +2,21 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
+        <priyankjivani_shippingrules>
+            <general>
+                <enabled>1</enabled>
+                <apply_in_admin>1</apply_in_admin>
+                <debug_logging>0</debug_logging>
+            </general>
+            <subtotal_conditions>
+                <include_tax_in_subtotal>0</include_tax_in_subtotal>
+                <use_subtotal_after_discount>1</use_subtotal_after_discount>
+            </subtotal_conditions>
+            <calculation_behavior>
+                <display_discount_breakdown>1</display_discount_breakdown>
+                <zero_rate_custom_title></zero_rate_custom_title>
+            </calculation_behavior>
+        </priyankjivani_shippingrules>
         <sales>
             <priyankjivani_shippingrules>
                 <enabled>1</enabled>

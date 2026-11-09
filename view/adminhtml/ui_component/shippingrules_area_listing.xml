@@ -1,159 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
             <item name="provider" xsi:type="string">shippingrules_area_listing.shippingrules_area_listing_data_source</item>
-            <item name="deps" xsi:type="string">shippingrules_area_listing.shippingrules_area_listing_data_source</item>
-        </item>
-        <item name="spinner" xsi:type="string">shippingrules_area_columns</item>
-        <item name="buttons" xsi:type="array">
-            <item name="add" xsi:type="array">
-                <item name="name" xsi:type="string">add</item>
-                <item name="label" xsi:type="string" translate="true">Add New Shipping Area</item>
-                <item name="class" xsi:type="string">primary</item>
-                <item name="url" xsi:type="string">*/*/new</item>
-            </item>
         </item>
     </argument>
-    <dataSource name="shippingrules_area_listing_data_source">
-        <argument name="dataProvider" xsi:type="configurableObject">
-            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
-            <argument name="name" xsi:type="string">shippingrules_area_listing_data_source</argument>
-            <argument name="primaryFieldName" xsi:type="string">area_id</argument>
-            <argument name="requestFieldName" xsi:type="string">area_id</argument>
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
-                    <item name="storageConfig" xsi:type="array">
-                        <item name="indexField" xsi:type="string">area_id</item>
-                    </item>
-                </item>
-            </argument>
-        </argument>
+    <settings>
+        <buttons>
+            <button name="add">
+                <url path="*/*/new"/>
+                <class>primary</class>
+                <label translate="true">Add New Shipping Area</label>
+            </button>
+        </buttons>
+        <spinner>shippingrules_area_columns</spinner>
+        <deps>
+            <dep>shippingrules_area_listing.shippingrules_area_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="shippingrules_area_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">area_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>PriyankJivani_ShippingRules::shipping_areas</aclResource>
+        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="shippingrules_area_listing_data_source">
+            <settings>
+                <requestFieldName>area_id</requestFieldName>
+                <primaryFieldName>area_id</primaryFieldName>
+            </settings>
+        </dataProvider>
     </dataSource>
     <listingToolbar name="listing_top">
-        <argument name="data" xsi:type="array">
-            <item name="config" xsi:type="array">
-                <item name="sticky" xsi:type="boolean">true</item>
-            </item>
-        </argument>
+        <settings>
+            <sticky>true</sticky>
+        </settings>
         <bookmark name="bookmarks"/>
         <columnsControls name="columns_controls"/>
         <filters name="listing_filters"/>
         <massaction name="listing_massaction">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="selectProvider" xsi:type="string">shippingrules_area_listing.shippingrules_area_listing.shippingrules_area_columns.ids</item>
-                    <item name="indexField" xsi:type="string">area_id</item>
-                </item>
-            </argument>
             <action name="delete">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="type" xsi:type="string">delete</item>
-                        <item name="label" xsi:type="string" translate="true">Delete</item>
-                        <item name="url" xsi:type="url" path="shippingrules/area/massDelete"/>
-                        <item name="confirm" xsi:type="array">
-                            <item name="title" xsi:type="string" translate="true">Delete Shipping Areas</item>
-                            <item name="message" xsi:type="string" translate="true">Are you sure you want to delete selected shipping areas?</item>
-                        </item>
-                    </item>
-                </argument>
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want to delete selected shipping areas?</message>
+                        <title translate="true">Delete Shipping Areas</title>
+                    </confirm>
+                    <url path="shippingrules/area/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
             </action>
             <action name="enable">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="type" xsi:type="string">enable</item>
-                        <item name="label" xsi:type="string" translate="true">Enable</item>
-                        <item name="url" xsi:type="url" path="shippingrules/area/massStatus">
-                            <param name="status">1</param>
-                        </item>
-                    </item>
-                </argument>
+                <settings>
+                    <url path="shippingrules/area/massStatus">
+                        <param name="status">1</param>
+                    </url>
+                    <type>enable</type>
+                    <label translate="true">Enable</label>
+                </settings>
             </action>
             <action name="disable">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="type" xsi:type="string">disable</item>
-                        <item name="label" xsi:type="string" translate="true">Disable</item>
-                        <item name="url" xsi:type="url" path="shippingrules/area/massStatus">
-                            <param name="status">0</param>
-                        </item>
-                    </item>
-                </argument>
+                <settings>
+                    <url path="shippingrules/area/massStatus">
+                        <param name="status">0</param>
+                    </url>
+                    <type>disable</type>
+                    <label translate="true">Disable</label>
+                </settings>
             </action>
         </massaction>
-        <exportButton name="export_button">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="options" xsi:type="array">
-                        <item name="csv" xsi:type="array">
-                            <item name="value" xsi:type="string">csv</item>
-                            <item name="label" xsi:type="string" translate="true">CSV</item>
-                            <item name="url" xsi:type="string">shippingrules/area/exportCsv</item>
-                        </item>
-                    </item>
-                </item>
-            </argument>
-        </exportButton>
         <paging name="listing_paging"/>
     </listingToolbar>
     <columns name="shippingrules_area_columns">
         <selectionsColumn name="ids">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="indexField" xsi:type="string">area_id</item>
-                </item>
-            </argument>
+            <settings>
+                <indexField>area_id</indexField>
+            </settings>
         </selectionsColumn>
         <column name="area_id">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">textRange</item>
-                    <item name="sorting" xsi:type="string">asc</item>
-                    <item name="label" xsi:type="string" translate="true">ID</item>
-                </item>
-            </argument>
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>asc</sorting>
+            </settings>
         </column>
         <column name="name">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">Area Name</item>
-                </item>
-            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Area Name</label>
+            </settings>
         </column>
-        <column name="is_active">
-            <argument name="data" xsi:type="array">
-                <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Enabledisable</item>
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">select</item>
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
-                    <item name="dataType" xsi:type="string">select</item>
-                    <item name="label" xsi:type="string" translate="true">Status</item>
-                </item>
-            </argument>
+        <column name="is_active" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Magento\Config\Model\Config\Source\Enabledisable"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Status</label>
+            </settings>
         </column>
-        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">dateRange</item>
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
-                    <item name="dataType" xsi:type="string">date</item>
-                    <item name="label" xsi:type="string" translate="true">Created At</item>
-                </item>
-            </argument>
+        <column name="description">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Description</label>
+            </settings>
         </column>
         <actionsColumn name="actions" class="PriyankJivani\ShippingRules\Ui\Component\Listing\Column\AreaActions">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="resizeEnabled" xsi:type="boolean">false</item>
-                    <item name="resizeDefaultWidth" xsi:type="string">120</item>
-                    <item name="indexField" xsi:type="string">area_id</item>
-                    <item name="label" xsi:type="string" translate="true">Action</item>
-                </item>
-            </argument>
+            <settings>
+                <indexField>area_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>120</resizeDefaultWidth>
+            </settings>
         </actionsColumn>
     </columns>
 </listing>

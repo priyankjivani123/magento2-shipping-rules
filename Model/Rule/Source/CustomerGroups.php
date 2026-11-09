@@ -18,17 +18,24 @@ class CustomerGroups implements OptionSourceInterface
     public function toOptionArray(): array
     {
         $groups = [];
-        $groups[] = [
-            'value' => 0,
-            'label' => __('NOT LOGGED IN')
-        ];
-
         $collection = $this->groupCollectionFactory->create();
+        $seen = [];
+
         foreach ($collection as $group) {
+            $id = (int)$group->getId();
+            $seen[$id] = true;
+            $code = $group->getCustomerGroupCode();
             $groups[] = [
-                'value' => (int)$group->getId(),
-                'label' => $group->getCustomerGroupCode()
+                'value' => $id,
+                'label' => $code ? (string)$code : __('NOT LOGGED IN')
             ];
+        }
+
+        if (!isset($seen[0])) {
+            array_unshift($groups, [
+                'value' => 0,
+                'label' => __('NOT LOGGED IN')
+            ]);
         }
 
         return $groups;

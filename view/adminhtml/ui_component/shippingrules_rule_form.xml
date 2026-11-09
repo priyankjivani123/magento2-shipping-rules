@@ -269,8 +269,8 @@
             </argument>
             <settings>
                 <dataType>text</dataType>
-                <label translate="true">Base Rate ($)</label>
-                <notice translate="true">Fixed base amount to replace, add, or deduct.</notice>
+                <label translate="true">Base Rate (Fixed Amount)</label>
+                <notice translate="true">Fixed base amount in store base currency to replace, add, or deduct.</notice>
                 <dataScope>calc_base_rate</dataScope>
             </settings>
         </field>
@@ -283,8 +283,8 @@
             </argument>
             <settings>
                 <dataType>text</dataType>
-                <label translate="true">Rate Per Product / Item ($)</label>
-                <notice translate="true">Multiplied by total quantity of matching products.</notice>
+                <label translate="true">Rate Per Product / Item</label>
+                <notice translate="true">Fixed amount in store base currency multiplied by total quantity of matching products.</notice>
                 <dataScope>calc_per_product</dataScope>
             </settings>
         </field>
@@ -297,8 +297,8 @@
             </argument>
             <settings>
                 <dataType>text</dataType>
-                <label translate="true">Rate Per Unit Weight ($)</label>
-                <notice translate="true">Multiplied by total weight of matching items.</notice>
+                <label translate="true">Rate Per Unit Weight</label>
+                <notice translate="true">Fixed amount in store base currency multiplied by total weight of matching items.</notice>
                 <dataScope>calc_per_weight</dataScope>
             </settings>
         </field>
@@ -338,7 +338,8 @@
             </argument>
             <settings>
                 <dataType>text</dataType>
-                <label translate="true">Minimum Rate Change ($)</label>
+                <label translate="true">Minimum Rate Change</label>
+                <notice translate="true">Minimum adjustment amount in store base currency.</notice>
                 <dataScope>min_rate_change</dataScope>
             </settings>
         </field>
@@ -350,7 +351,8 @@
             </argument>
             <settings>
                 <dataType>text</dataType>
-                <label translate="true">Maximum Rate Change ($)</label>
+                <label translate="true">Maximum Rate Change</label>
+                <notice translate="true">Maximum adjustment amount in store base currency.</notice>
                 <dataScope>max_rate_change</dataScope>
             </settings>
         </field>
@@ -362,8 +364,8 @@
             </argument>
             <settings>
                 <dataType>text</dataType>
-                <label translate="true">Minimum Total Rate ($)</label>
-                <notice translate="true">Guarantees final shipping rate will not be lower than this amount.</notice>
+                <label translate="true">Minimum Total Rate</label>
+                <notice translate="true">Guarantees final shipping rate in store base currency will not be lower than this amount.</notice>
                 <dataScope>min_total_rate</dataScope>
             </settings>
         </field>
@@ -375,8 +377,8 @@
             </argument>
             <settings>
                 <dataType>text</dataType>
-                <label translate="true">Maximum Total Rate ($)</label>
-                <notice translate="true">Guarantees final shipping rate will not exceed this cap.</notice>
+                <label translate="true">Maximum Total Rate</label>
+                <notice translate="true">Guarantees final shipping rate in store base currency will not exceed this cap.</notice>
                 <dataScope>max_total_rate</dataScope>
             </settings>
         </field>

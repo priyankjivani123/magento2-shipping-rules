@@ -2,6 +2,69 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
+        <section id="priyankjivani_shippingrules" translate="label" type="text" sortOrder="350" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Shipping Rules Settings</label>
+            <tab>sales</tab>
+            <resource>PriyankJivani_ShippingRules::config</resource>
+
+            <!-- General Settings -->
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Shipping Rules</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable or disable all custom shipping rule calculations across all carriers and storefronts.</comment>
+                </field>
+
+                <field id="apply_in_admin" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Apply Rules in Admin Order Creation</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Apply custom shipping rules when generating backend orders manually from the Magento Admin.</comment>
+                </field>
+
+                <field id="debug_logging" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Debug &amp; Diagnostic Logging</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Log detailed condition evaluation traces and rate adjustments to var/log/shipping_rules.log.</comment>
+                </field>
+            </group>
+
+            <!-- Subtotal & Tax Evaluation -->
+            <group id="subtotal_conditions" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Subtotal &amp; Tax Calculation Settings</label>
+
+                <field id="include_tax_in_subtotal" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Include Tax in Subtotal Conditions</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>When enabled, cart subtotal condition evaluations include tax.</comment>
+                </field>
+
+                <field id="use_subtotal_after_discount" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use Subtotal After Discount</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Evaluate cart subtotal conditions using the post-discount subtotal amount.</comment>
+                </field>
+            </group>
+
+            <!-- Calculation & Display Behavior -->
+            <group id="calculation_behavior" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Calculation &amp; Display Behavior</label>
+
+                <field id="display_discount_breakdown" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Shipping Discount Breakdown</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Show the calculated shipping savings in cart and checkout when discount rules apply.</comment>
+                </field>
+
+                <field id="zero_rate_custom_title" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Zero Rate Custom Title</label>
+                    <comment>Optional custom method title (e.g. Free Shipping) when a rule reduces the rate to 0. Leave empty to preserve carrier method title.</comment>
+                </field>
+            </group>
+        </section>
+
+        <!-- Keep sales section group for full backwards compatibility -->
         <section id="sales">
             <group id="priyankjivani_shippingrules" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Shipping Rules by Priyank Jivani</label>

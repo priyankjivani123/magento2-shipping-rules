@@ -2,7 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-        <!-- Sales -> Shipping Rules -> Manage Rules -->
+        <!-- Sales -> Shipping Rules Category -->
         <add id="PriyankJivani_ShippingRules::shipping_rules"
              title="Shipping Rules"
              module="PriyankJivani_ShippingRules"
@@ -10,6 +10,7 @@
              parent="Magento_Sales::sales"
              resource="PriyankJivani_ShippingRules::shipping_rules"/>
 
+        <!-- Sales -> Shipping Rules -> Manage Rules -->
         <add id="PriyankJivani_ShippingRules::manage_rules"
              title="Manage Rules"
              module="PriyankJivani_ShippingRules"
@@ -18,7 +19,25 @@
              action="shippingrules/rule/index"
              resource="PriyankJivani_ShippingRules::manage_rules"/>
 
-        <!-- Stores -> Shipping Areas -->
+        <!-- Sales -> Shipping Rules -> Shipping Areas -->
+        <add id="PriyankJivani_ShippingRules::manage_areas_sales"
+             title="Shipping Areas"
+             module="PriyankJivani_ShippingRules"
+             sortOrder="20"
+             parent="PriyankJivani_ShippingRules::shipping_rules"
+             action="shippingrules/area/index"
+             resource="PriyankJivani_ShippingRules::shipping_areas"/>
+
+        <!-- Sales -> Shipping Rules -> Configuration -->
+        <add id="PriyankJivani_ShippingRules::config_menu"
+             title="Configuration"
+             module="PriyankJivani_ShippingRules"
+             sortOrder="30"
+             parent="PriyankJivani_ShippingRules::shipping_rules"
+             action="adminhtml/system_config/edit/section/priyankjivani_shippingrules"
+             resource="PriyankJivani_ShippingRules::config"/>
+
+        <!-- Stores -> Settings -> Shipping Areas -->
         <add id="PriyankJivani_ShippingRules::shipping_areas"
              title="Shipping Areas"
              module="PriyankJivani_ShippingRules"
