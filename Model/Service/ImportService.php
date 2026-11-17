@@ -75,11 +75,11 @@ class ImportService
                 $groups = !empty($row[$headerMap['customer_groups'] ?? -1]) ? explode(',', $row[$headerMap['customer_groups']]) : [0, 1, 2, 3];
                 $rule->setCustomerGroupIds(array_map('intval', $groups));
 
-                $carriers = !empty($row[$headerMap['carriers'] ?? -1]) ? explode(',', $row[$headerMap['carriers']]) : [];
-                $rule->setCarriers($carriers);
+                $carriersRaw = $row[$headerMap['carriers'] ?? -1] ?? '';
+                $rule->setCarriers(!empty(trim((string)$carriersRaw)) ? trim((string)$carriersRaw) : null);
 
-                $methods = !empty($row[$headerMap['methods'] ?? -1]) ? explode(',', $row[$headerMap['methods']]) : [];
-                $rule->setMethods($methods);
+                $methodsRaw = $row[$headerMap['methods'] ?? -1] ?? '';
+                $rule->setMethods(!empty(trim((string)$methodsRaw)) ? trim((string)$methodsRaw) : null);
 
                 $calcType = $row[$headerMap['calculation_type'] ?? -1] ?? 'replace';
                 $rule->setCalculationType($calcType);
@@ -103,24 +103,36 @@ class ImportService
                     $rule->setMaxTotalRate((float)$row[$headerMap['max_total_rate']]);
                 }
 
-                $rule->setCustomCarrierTitle($row[$headerMap['custom_carrier_title'] ?? -1] ?? null);
-                $rule->setCustomMethodTitle($row[$headerMap['custom_method_title'] ?? -1] ?? null);
+                $carrierTitle = $row[$headerMap['custom_carrier_title'] ?? -1] ?? null;
+                $rule->setCustomCarrierLabel(!empty(trim((string)$carrierTitle)) ? trim((string)$carrierTitle) : null);
+
+                $methodTitle = $row[$headerMap['custom_method_title'] ?? -1] ?? null;
+                $rule->setCustomMethodLabel(!empty(trim((string)$methodTitle)) ? trim((string)$methodTitle) : null);
+
                 $rule->setDiscardSubsequentRules((bool)(int)($row[$headerMap['discard_subsequent_rules'] ?? -1] ?? 0));
 
                 $rule->setFromDate(!empty($row[$headerMap['from_date'] ?? -1]) ? $row[$headerMap['from_date']] : null);
                 $rule->setToDate(!empty($row[$headerMap['to_date'] ?? -1]) ? $row[$headerMap['to_date']] : null);
 
-                $days = !empty($row[$headerMap['days_of_week'] ?? -1]) ? explode(',', $row[$headerMap['days_of_week']]) : [];
-                $rule->setDaysOfWeek($days);
+                $daysRaw = $row[$headerMap['days_of_week'] ?? -1] ?? '';
+                $rule->setDaysOfWeek(!empty(trim((string)$daysRaw)) ? trim((string)$daysRaw) : null);
 
                 $rule->setTimeFrom(!empty($row[$headerMap['time_from'] ?? -1]) ? $row[$headerMap['time_from']] : null);
                 $rule->setTimeTo(!empty($row[$headerMap['time_to'] ?? -1]) ? $row[$headerMap['time_to']] : null);
-                $rule->setCouponType($row[$headerMap['coupon_type'] ?? -1] ?? 'all');
-                $rule->setCouponCode(!empty($row[$headerMap['coupon_code'] ?? -1]) ? $row[$headerMap['coupon_code']] : null);
-                $rule->setBackorderMode($row[$headerMap['backorder_mode'] ?? -1] ?? 'all');
+
+                $couponTypeRaw = (string)($row[$headerMap['coupon_type'] ?? -1] ?? 'all');
+                $rule->setCouponType($couponTypeRaw === 'specific' || $couponTypeRaw === '1' ? 1 : 0);
+                $rule->setCouponCode(!empty($row[$headerMap['coupon_code'] ?? -1]) ? (string)$row[$headerMap['coupon_code']] : null);
+
+                $backorderRaw = (string)($row[$headerMap['backorder_mode'] ?? -1] ?? 'all');
+                $backorderInt = ($backorderRaw === 'backorders' || $backorderRaw === '2') ? 2 : (($backorderRaw === 'in_stock' || $backorderRaw === '1') ? 1 : 0);
+                $rule->setBackorderMode($backorderInt);
 
                 if (!empty($row[$headerMap['conditions_serialized'] ?? -1])) {
-                    $rule->setConditionsSerialized($row[$headerMap['conditions_serialized']]);
+                    $condRaw = trim((string)$row[$headerMap['conditions_serialized']]);
+                    if (str_starts_with($condRaw, '{') || str_starts_with($condRaw, '[')) {
+                        $rule->setConditionsSerialized($condRaw);
+                    }
                 }
 
                 $this->ruleRepository->save($rule);
@@ -171,26 +183,26 @@ class ImportService
                 $area->setDescription($row[$headerMap['description'] ?? -1] ?? '');
                 $area->setIsActive((bool)(int)($row[$headerMap['is_active'] ?? -1] ?? 1));
 
-                $countries = !empty($row[$headerMap['countries'] ?? -1]) ? explode(',', $row[$headerMap['countries']]) : [];
-                $area->setCountries($countries);
+                $countriesRaw = $row[$headerMap['countries'] ?? -1] ?? '';
+                $area->setCountries(!empty(trim((string)$countriesRaw)) ? trim((string)$countriesRaw) : null);
 
-                $regions = !empty($row[$headerMap['regions'] ?? -1]) ? explode(',', $row[$headerMap['regions']]) : [];
-                $area->setRegions($regions);
+                $regionsRaw = $row[$headerMap['regions'] ?? -1] ?? '';
+                $area->setRegions(!empty(trim((string)$regionsRaw)) ? trim((string)$regionsRaw) : null);
 
                 $citiesRaw = $row[$headerMap['cities'] ?? -1] ?? '';
-                $cities = preg_split('/[\r\n,]+/', (string)$citiesRaw, -1, PREG_SPLIT_NO_EMPTY) ?: [];
-                $area->setCities(array_map('trim', $cities));
+                $area->setCities(!empty(trim((string)$citiesRaw)) ? trim((string)$citiesRaw) : null);
 
                 $postcodesRaw = $row[$headerMap['postcodes'] ?? -1] ?? '';
-                $postcodes = preg_split('/[\r\n,]+/', (string)$postcodesRaw, -1, PREG_SPLIT_NO_EMPTY) ?: [];
-                $area->setPostcodes(array_map('trim', $postcodes));
+                $area->setPostcodes(!empty(trim((string)$postcodesRaw)) ? trim((string)$postcodesRaw) : null);
 
                 $addressRaw = $row[$headerMap['address_lines'] ?? -1] ?? '';
-                $addressLines = preg_split('/[\r\n,]+/', (string)$addressRaw, -1, PREG_SPLIT_NO_EMPTY) ?: [];
-                $area->setAddressLines(array_map('trim', $addressLines));
+                $area->setAddressLines(!empty(trim((string)$addressRaw)) ? trim((string)$addressRaw) : null);
 
-                $area->setAddressLinesType($row[$headerMap['address_lines_type'] ?? -1] ?? 'include');
-
+                $area->setCountriesType(0);
+                $area->setRegionsType(0);
+                $area->setCitiesType(0);
+                $area->setPostcodesType(0);
+                $area->setAddressLinesType(($row[$headerMap['address_lines_type'] ?? -1] ?? '') === 'exclude' ? 2 : 1);
                 $this->areaRepository->save($area);
                 $successCount++;
             } catch (\Throwable $e) {
